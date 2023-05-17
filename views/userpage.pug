@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Gitlab Oauth
+    style
+      include ./index.css
+      include ./partials/partials.css
+  body
+    .userprofile
+      h1 Welcome
+      img(src=userInfo.avatar)
+      p Name: #{userInfo.name}
+      p ID: #{userInfo.id}
+      p Username: #{userInfo.username}
+      p Email: #{userInfo.email}
+      p Repository: #{userInfo.profileUrl}
+      p Last Activity: #{userInfo.last_activity}
+  p # of Activities: #{activities.length}
+    .table
+        table()
+          tr
+            th Username
+            th Project ID
+            th Action
+            th Commit Title
+            th Target Type
+          
+            each val in activities
+              tr
+                td #{val.author_username}
+                td #{val.project_id}
+                td #{val.action_name}
+                if val.push_data
+                  td #{val.push_data.commit_title}
+                else
+                  td #{"None"}
+                if val.target_type
+                  td #{val.target_type}
+                else
+                  td #{"None"}
+
+include ./partials/footer.pug
